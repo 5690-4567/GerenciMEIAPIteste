@@ -1,11 +1,18 @@
-
-from sqlite3 import IntegrityError
 from fastapi import APIRouter, Depends, HTTPException, status 
 from pydantic import BaseModel, ConfigDict
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session 
+
 from database import get_db 
 from models.perfis import Perfil, PerfilUsuario
+
+from models.perfis import PerfilUsuario
+from pydantic import BaseModel
+
+class PerfilCreate(BaseModel):
+    nome: PerfilUsuario
+    descricao: str | None = None
 
 router = APIRouter(prefix="/perfis", tags=["perfil"])  
 
@@ -22,7 +29,7 @@ def buscar_perfil(id: int, db: Session) -> Perfil:
     if perfil is None:         
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Perfil não encontrado.") 
     return perfil
-@router.get("/[id]", response_model=PerfilSaida)
+@router.get("/{id}", response_model=PerfilSaida)
 def obter_perfil(id: int, db: Session = Depends(get_db)):
     return  buscar_perfil(id, db)
 

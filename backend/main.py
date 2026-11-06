@@ -11,3 +11,4 @@ app.include_router(categorias.router)
 @app.get("/")
 def raiz():
     return "GerenciMEI no ar"
+

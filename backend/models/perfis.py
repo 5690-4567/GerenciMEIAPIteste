@@ -1,12 +1,13 @@
 import enum
+
 from sqlalchemy import BigInteger, Identity, Text
 from sqlalchemy.dialects.postgresql import ENUM
 from sqlalchemy.orm import Mapped, mapped_column 
+
 from database import Base  
-
 class PerfilUsuario(str, enum.Enum):  
-    ADMIN ="adimin"   
-
+    ADMINISTRADOR ="ADMINISTRADOR"   
+    EMPREENDEDOR_MEI ="EMPREENDEDOR_MEI"
 class Perfil(Base):    
     __tablename__ = "perfil"     
     __table_args__ = {"schema": "public"}  

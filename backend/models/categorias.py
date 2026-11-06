@@ -7,8 +7,8 @@ from sqlalchemy.orm import Mapped, mapped_column
 from database import Base  
 
 class TipoCategoria(str, enum.Enum):   
-    RECEITA ="receita"  
-    DESPESA ="despesa"
+    RECEITA ="RECEITA"  
+    DESPESA ="DESPESA"
 
 class Categoria(Base): 
     __tablename__ = "categoria"     
@@ -20,8 +20,8 @@ class Categoria(Base):
                     primary_key=True,     
     )     
     nome: Mapped[str] = mapped_column(
-                        String(100),         
-                        nullable=False,     
+                    String(100),         
+                    nullable=False,     
     )     
     tipo: Mapped[TipoCategoria] = mapped_column(
                                 ENUM(

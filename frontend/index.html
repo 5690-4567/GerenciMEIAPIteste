@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GerenciMEI – CRUD de Perfil e Categoria</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>GerenciMEI</h1>
+    <p>Teste do CRUD: GET (listar, pesquisar, buscar por id), POST, PUT e DELETE.</p>
+  </header>
+
+  <main>
+
+    <!-- CONEXÃO -->
+    <section id="conexao">
+      <h2>Conexão com a API</h2>
+      <form id="form-conexao" onsubmit="return false">
+        <label>
+          URL da API
+          <input type="url" id="base-url" value="http://localhost:3000">
+        </label>
+        <label class="inline">
+          <input type="checkbox" id="modo-simulado" checked>
+          Modo simulado (sem servidor nem banco)
+        </label>
+      </form>
+    </section>
+
+    <!-- PERFIL -->
+    <section id="perfil">
+      <h2>Perfil</h2>
+      <p>Tabela <code>perfil</code>: id, nome. Tipos: Empreendedor MEI e Administrador.</p>
+
+      <form id="form-perfil">
+        <input type="hidden" name="id">
+        <label>
+          Tipo de perfil (nome)
+          <select name="nome" required>
+            <option value="EMPREENDEDOR_MEI">Empreendedor MEI</option>
+            <option value="ADMINISTRADOR">Administrador</option>
+          </select>
+        </label>
+        <button type="submit">Cadastrar</button>
+        <button type="button" data-cancelar hidden>Cancelar edição</button>
+      </form>
+
+      <form id="busca-perfil">
+        <label>
+          Pesquisar por nome
+          <input type="search" name="q" placeholder="ex.: admin">
+        </label>
+        <button type="submit">Listar / pesquisar</button>
+      </form>
+
+      <form id="id-perfil">
+        <label>
+          Buscar por id
+          <input type="number" name="id" min="1" required>
+        </label>
+        <button type="submit">Buscar</button>
+      </form>
+
+      <p id="status-perfil" role="status"></p>
+
+      <div class="tabela-rolagem">
+        <table>
+          <thead>
+            <tr><th>id</th><th>nome</th><th>ações</th></tr>
+          </thead>
+          <tbody id="tbody-perfil"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CATEGORIA -->
+    <section id="categoria">
+      <h2>Categoria</h2>
+      <p>Tabela <code>categoria</code>: id, nome, tipo (receita ou despesa), ativa.</p>
+
+      <form id="form-categoria">
+        <input type="hidden" name="id">
+        <label>
+          Nome
+          <input type="text" name="nome" maxlength="100" required>
+        </label>
+        <label>
+          Tipo
+          <select name="tipo" required>
+            <option value="RECEITA">Receita</option>
+            <option value="DESPESA">Despesa</option>
+          </select>
+        </label>
+        <label class="inline">
+          <input type="checkbox" name="ativa" checked>
+          Ativa
+        </label>
+        <button type="submit">Cadastrar</button>
+        <button type="button" data-cancelar hidden>Cancelar edição</button>
+      </form>
+
+      <form id="busca-categoria">
+        <label>
+          Pesquisar por nome
+          <input type="search" name="q" placeholder="ex.: vendas">
+        </label>
+        <label>
+          Filtrar por tipo
+          <select name="tipo">
+            <option value="">Todos</option>
+            <option value="RECEITA">Receita</option>
+            <option value="DESPESA">Despesa</option>
+          </select>
+        </label>
+        <button type="submit">Listar / pesquisar</button>
+      </form>
+
+      <form id="id-categoria">
+        <label>
+          Buscar por id
+          <input type="number" name="id" min="1" required>
+        </label>
+        <button type="submit">Buscar</button>
+      </form>
+
+      <p id="status-categoria" role="status"></p>
+
+      <div class="tabela-rolagem">
+        <table>
+          <thead>
+            <tr><th>id</th><th>nome</th><th>tipo</th><th>ativa</th><th>ações</th></tr>
+          </thead>
+          <tbody id="tbody-categoria"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- REGISTRO DE REQUISIÇÕES -->
+    <section id="registro">
+      <h2>O que o CRUD fez</h2>
+      <p>Cada ação abaixo mostra a requisição HTTP, o comando SQL equivalente e a resposta.</p>
+      <button type="button" id="limpar-log">Limpar registro</button>
+      <ol id="log" reversed></ol>
+    </section>
+
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
