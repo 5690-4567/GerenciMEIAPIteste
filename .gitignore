@@ -1,12 +1,6 @@
-# Ambientes virtuais Python
+.env
 .venv/
 venv/
+node_modules/
 __pycache__/
 *.pyc
-
-# Node
-node_modules/
-
-# Segredos
-.env
-**/.env
